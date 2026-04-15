@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Szilvay - Artist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-brand {
+            display: none;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: #666666;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #000000;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        /* Hero Section with Video */
+        .hero-video {
+            position: relative;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 9;
+        }
+
+        .hero-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .hero-content h1 {
+            font-size: 72px;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 96px 24px;
+        }
+
+        /* Exhibition Section */
+        .exhibition {
+            margin-bottom: 160px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            background: #fafafa;
+            padding: 48px;
+            scroll-margin-top: 100px;
+        }
+
+        .exhibition-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .exhibition-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .exhibition-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid #555555;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #555555;
+            margin-bottom: 24px;
+        }
+
+        .exhibition h2 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+
+        .exhibition-date {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        .exhibition-desc {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .exhibition-location {
+            font-size: 14px;
+            font-weight: 500;
+            color: #999999;
+        }
+
+        .exhibition-image {
+            aspect-ratio: 4 / 5;
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .exhibition-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* About Section */
+        .about {
+            margin-bottom: 160px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            scroll-margin-top: 100px;
+        }
+
+        @media (min-width: 768px) {
+            .about {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+
+        .about-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-weight: 700;
+            color: #555555;
+            margin-bottom: 16px;
+        }
+
+        .about-subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .about-text {
+            font-size: 18px;
+            color: #333333;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .about-text p {
+            margin-bottom: 32px;
+        }
+
+        .about-text strong {
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .about-text em {
+            font-style: italic;
+            color: #000000;
+        }
+
+        /* Works/Gallery Section */
+        .works {
+            margin-bottom: 160px;
+            scroll-margin-top: 100px;
+        }
+
+        .works h2 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .lightbox-image {
+            max-width: 70%;
+            max-height: 80vh;
+        }
+
+        .lightbox-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .lightbox-info {
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .lightbox-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .lightbox-size,
+        .lightbox-technique {
+            font-size: 14px;
+            color: #cccccc;
+            margin-bottom: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            border-top: 1px solid #e5e5e5;
+            padding-top: 128px;
+            text-align: center;
+            scroll-margin-top: 100px;
+        }
+
+        .contact h2 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-email {
+            font-size: 32px;
+            font-weight: 300;
+            color: #333333;
+            text-decoration: underline;
+            text-decoration-color: #cccccc;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 8px;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-bottom: 32px;
+        }
+
+        .contact-email:hover {
+            color: #000000;
+            text-decoration-color: #000000;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 16px 32px;
+            background: #ffffff;
+            border: 1px solid #555555;
+            border-radius: 999px;
+            color: #555555;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #555555;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 24px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #999999;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            main {
+                padding: 60px 20px;
+            }
+
+            .exhibition h2 {
+                font-size: 32px;
+            }
+
+            .contact h2 {
+                font-size: 32px;
+            }
+
+            .lightbox-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .lightbox-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#works">Works</a>
+                <a href="#exhibitions">Exhibitions</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <section class="hero-video">
+        <video autoplay muted loop playsinline>
+            <source src="painting-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>Anton Szilvay</h1>
+        </div>
+    </section>
+
+    <main>
+        <!-- Featured Exhibition -->
+        <section id="exhibitions" class="exhibition">
+            <div class="exhibition-content">
+                <div>
+                    <span class="exhibition-badge">Upcoming Solo Exhibition</span>
+                    <h2>Fluctuations</h2>
+                    <div class="exhibition-date">17.8. – 12.10.2026</div>
+                    <p class="exhibition-desc">A solo exhibition of oil and acrylic paintings exploring everyday human life and inner emotional experiences. Where nothing remains entirely permanent or still.</p>
+                    <div class="exhibition-location">Satakunnan University of Applied Sciences • Pori, Finland</div>
+                </div>
+                <div class="exhibition-image">
+                    <img src="exhibition-image.jpg" alt="Fluctuations">
+                </div>
+            </div>
+        </section>
+
+        <!-- Works/Gallery -->
+        <section id="works" class="works">
+            <h2>Portfolio / Work</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Boy with a dream" data-size="30 x 25 cm" data-technique="Acrylic and oil paint on canvas">
+                    <img src="Boy_with_a_dream.jpg" alt="Boy with a dream">
+                    <div class="gallery-title">Boy with a dream</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Broken Stare" data-size="35 x 27 cm" data-technique="Oil painting on canvas">
+                    <img src="Broken_stare.jpg" alt="Broken Stare">
+                    <div class="gallery-title">Broken Stare</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Eye infection" data-size="30 x 23 cm" data-technique="Oil painting on canvas">
+                    <img src="Eye_infection.jpg" alt="Eye infection">
+                    <div class="gallery-title">Eye infection</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Fluctuations" data-size="40 x 40 cm" data-technique="Oil painting on canvas">
+                    <img src="Fluctuations.jpg" alt="Fluctuations">
+                    <div class="gallery-title">Fluctuations</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Gnash" data-size="30 x 23 cm" data-technique="Acrylic and oil painting on canvas">
+                    <img src="Gnash.jpg" alt="Gnash">
+                    <div class="gallery-title">Gnash</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Morning breath" data-size="40 x 50 cm" data-technique="Acrylic and oil painting on canvas">
+                    <img src="Morning_breath.jpg" alt="Morning breath">
+                    <div class="gallery-title">Morning breath</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
+                    <img src="untitled_1.jpg" alt="Untitled">
+                    <div class="gallery-title">Untitled</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
+                    <img src="untitled_2.jpg" alt="Untitled">
+                    <div class="gallery-title">Untitled</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
+                    <img src="untitled_3.jpg" alt="Untitled">
+                    <div class="gallery-title">Untitled</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
+                    <img src="untitled_4.jpg" alt="Untitled">
+                    <div class="gallery-title">Untitled</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div>
+                <h3 class="about-title">Bio</h3>
+            </div>
+            <div class="about-text">
+                <p>I am a visual artist based in Kankaanpää, Finland, currently studying fine arts at Satakunnan University of Applied Sciences. Through grotesque yet empathetic characters, my work explores the inner movements of the mind—thoughts, emotions, and psychological states that blur the line between reality and the subconscious.</p>
+                <p>Working primarily with oil and acrylic, I blend sensitivity, irony, and raw physicality. My practice spans over eleven years, including formal training at Helsinki's Art School, where I completed the comprehensive art education program and exhibited my graduation work in 2021.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2>Inquire & Connect</h2>
+            <a href="mailto:anton.szilvay@gmail.com" class="contact-email">anton.szilvay@gmail.com</a>
+            <div class="contact-buttons">
+                <a href="https://instagram.com/anton.szilvay" target="_blank" class="contact-btn">Instagram</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content">
+            <div class="lightbox-image">
+                <img id="lightboxImage" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-size" id="lightboxSize"></p>
+                <p class="lightbox-technique" id="lightboxTechnique"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 Anton Szilvay • Based in Kankaanpää, Finland
+    </footer>
+
+    <script>
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const title = element.getAttribute('data-title');
+            const size = element.getAttribute('data-size');
+            const technique = element.getAttribute('data-technique');
+            
+            document.getElementById('lightboxImage').src = img.src;
+            document.getElementById('lightboxTitle').textContent = title;
+            document.getElementById('lightboxSize').textContent = size;
+            document.getElementById('lightboxTechnique').textContent = technique;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
