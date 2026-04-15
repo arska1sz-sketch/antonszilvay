@@ -44,29 +44,8 @@
         }
 
         .nav-links {
-            display: none;
+            display: flex;
             gap: 40px;
-        }
-
-        .nav-links a {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            text-decoration: none;
-            color: #666666;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #000000;
-        }
-
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-            }
         }
 
         /* Hero Section with Video */
@@ -454,30 +433,137 @@
             color: #999999;
         }
 
+        .nav-links a {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            color: #666666;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #000000;
+        }
+
         @media (max-width: 768px) {
+            .hero-video {
+                aspect-ratio: 16 / 6;
+                margin-top: 60px;
+            }
+
+            .nav-links a {
+                font-size: 8px;
+                gap: 12px;
+            }
+
             .hero-content h1 {
-                font-size: 48px;
+                font-size: 28px;
             }
 
             main {
-                padding: 60px 20px;
+                padding: 32px 12px;
+            }
+
+            .exhibition {
+                padding: 24px 12px;
+                margin-bottom: 60px;
             }
 
             .exhibition h2 {
-                font-size: 32px;
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .exhibition-date {
+                font-size: 12px;
+            }
+
+            .exhibition-desc {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            .exhibition-location {
+                font-size: 12px;
+            }
+
+            .works {
+                margin-bottom: 60px;
+            }
+
+            .works h2 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .gallery-grid {
+                gap: 10px;
+            }
+
+            .gallery-title {
+                padding: 12px;
+                font-size: 11px;
+            }
+
+            .about {
+                gap: 20px;
+            }
+
+            .about-title {
+                font-size: 10px;
+                margin-bottom: 12px;
+            }
+
+            .about-text {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .about-text p {
+                margin-bottom: 16px;
             }
 
             .contact h2 {
-                font-size: 32px;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .contact-email {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .contact-btn {
+                padding: 12px 24px;
+                font-size: 11px;
             }
 
             .lightbox-content {
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
+                padding: 0 8px;
             }
 
             .lightbox-image {
                 max-width: 100%;
+            }
+
+            .lightbox-title {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .lightbox-size,
+            .lightbox-technique {
+                font-size: 12px;
+            }
+
+            footer {
+                padding: 32px 12px;
+                font-size: 8px;
             }
         }
     </style>
