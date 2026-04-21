@@ -240,8 +240,42 @@
         .works h2 {
             font-size: 32px;
             font-weight: 400;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
             letter-spacing: -0.02em;
+        }
+
+        /* --- Filter Bar --- */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #555555;
+            border-radius: 999px;
+            background: transparent;
+            color: #555555;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .filter-btn.active {
+            background: #000000;
+            border-color: #000000;
+            color: #ffffff;
         }
 
         .gallery-grid {
@@ -256,8 +290,12 @@
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
             position: relative;
+        }
+
+        .gallery-item.hidden {
+            display: none;
         }
 
         .gallery-item:hover {
@@ -312,14 +350,20 @@
         }
 
         .lightbox-image {
-            max-width: 70%;
-            max-height: 80vh;
+            flex-shrink: 1;
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .lightbox-image img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 70vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            display: block;
         }
 
         .lightbox-info {
@@ -499,6 +543,11 @@
                 margin-bottom: 20px;
             }
 
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 9px;
+            }
+
             .gallery-grid {
                 gap: 10px;
             }
@@ -549,6 +598,11 @@
 
             .lightbox-image {
                 max-width: 100%;
+            }
+
+            .lightbox-image img {
+                max-width: 90vw;
+                max-height: 60vh;
             }
 
             .lightbox-title {
@@ -611,46 +665,120 @@
         <!-- Works/Gallery -->
         <section id="works" class="works">
             <h2>Portfolio / Work</h2>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <button class="filter-btn" data-filter="2017-2019">2017–2019</button>
+                <button class="filter-btn" data-filter="2020-2023">2020–2023</button>
+                <button class="filter-btn active" data-filter="2024-2026">2024–2026</button>
+            </div>
+
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Boy with a dream" data-size="30 x 25 cm" data-technique="Acrylic and oil paint on canvas">
+
+                <!-- ===== 2017–2019 ===== -->
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Suomi satavuotta" data-size="" data-technique="Linocut on paper">
+                    <img src="Suomi_satavuotta.jpg" alt="Suomi satavuotta">
+                    <div class="gallery-title">Suomi satavuotta</div>
+                </div>
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Meduusa" data-size="" data-technique="Watercolor on paper">
+                    <img src="Meduusa.jpg" alt="Meduusa">
+                    <div class="gallery-title">Meduusa</div>
+                </div>
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Hyasinttiara" data-size="" data-technique="Oil paint on canvas">
+                    <img src="Hyasinttiara.jpg" alt="Hyasinttiara">
+                    <div class="gallery-title">Hyasinttiara</div>
+                </div>
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Eläinystävät" data-size="" data-technique="Charcoal and wax crayon on paper">
+                    <img src="Elainystavat.jpg" alt="Eläinystävät">
+                    <div class="gallery-title">Eläinystävät</div>
+                </div>
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Flamingo" data-size="" data-technique="Oil painting on canvas">
+                    <img src="Flamingo.jpg" alt="Flamingo">
+                    <div class="gallery-title">Flamingo</div>
+                </div>
+                <div class="gallery-item" data-era="2017-2019" onclick="openLightbox(this)" data-title="Colourful flight" data-size="" data-technique="Acrylic on paper">
+                    <img src="Colourful_flight.jpg" alt="Colourful flight">
+                    <div class="gallery-title">Colourful flight</div>
+                </div>
+
+                <!-- ===== 2020–2023 ===== -->
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Yö lento" data-size="" data-technique="Oil paint on paper">
+                    <img src="Yo_lento.jpg" alt="Yö lento">
+                    <div class="gallery-title">Yö lento</div>
+                </div>
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Watcher" data-size="" data-technique="Ink wash on paper">
+                    <img src="Watcher.jpg" alt="Watcher">
+                    <div class="gallery-title">Watcher</div>
+                </div>
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Scorpion forest" data-size="" data-technique="Oil and ink on canvas">
+                    <img src="Scorpion_forest.jpg" alt="Scorpion forest">
+                    <div class="gallery-title">Scorpion forest</div>
+                </div>
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Colorful chains" data-size="" data-technique="Oil and acrylic on canvas">
+                    <img src="Colorful_chains.jpg" alt="Colorful chains">
+                    <div class="gallery-title">Colorful chains</div>
+                </div>
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Chains" data-size="" data-technique="Oil on canvas">
+                    <img src="Chains.jpg" alt="Chains">
+                    <div class="gallery-title">Chains</div>
+                </div>
+                <div class="gallery-item" data-era="2020-2023" onclick="openLightbox(this)" data-title="Ticking heart" data-size="" data-technique="Oil and acrylic on canvas">
+                    <img src="Ticking_heart.jpg" alt="Ticking heart">
+                    <div class="gallery-title">Ticking heart</div>
+                </div>
+
+                <!-- ===== 2024–2026 ===== -->
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Boy with a dream" data-size="30 x 25 cm" data-technique="Acrylic and oil paint on canvas">
                     <img src="Boy_with_a_dream.jpg" alt="Boy with a dream">
                     <div class="gallery-title">Boy with a dream</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Broken Stare" data-size="35 x 27 cm" data-technique="Oil painting on canvas">
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Broken Stare" data-size="35 x 27 cm" data-technique="Oil painting on canvas">
                     <img src="Broken_stare.jpg" alt="Broken Stare">
                     <div class="gallery-title">Broken Stare</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Eye infection" data-size="30 x 23 cm" data-technique="Oil painting on canvas">
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Eye infection" data-size="30 x 23 cm" data-technique="Oil painting on canvas">
                     <img src="Eye_infection.jpg" alt="Eye infection">
                     <div class="gallery-title">Eye infection</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Fluctuations" data-size="40 x 40 cm" data-technique="Oil painting on canvas">
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Fluctuations" data-size="40 x 40 cm" data-technique="Oil painting on canvas">
                     <img src="Fluctuations.jpg" alt="Fluctuations">
                     <div class="gallery-title">Fluctuations</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Gnash" data-size="30 x 23 cm" data-technique="Acrylic and oil painting on canvas">
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Gnash" data-size="30 x 23 cm" data-technique="Acrylic and oil painting on canvas">
                     <img src="Gnash.jpg" alt="Gnash">
                     <div class="gallery-title">Gnash</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Morning breath" data-size="40 x 50 cm" data-technique="Acrylic and oil painting on canvas">
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Morning breath" data-size="40 x 50 cm" data-technique="Acrylic and oil painting on canvas">
                     <img src="Morning_breath.jpg" alt="Morning breath">
                     <div class="gallery-title">Morning breath</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
-                    <img src="untitled_1.jpg" alt="Untitled">
-                    <div class="gallery-title">Untitled</div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Blue note" data-size="" data-technique="Acrylic and oil paint on canvas">
+                    <img src="Blue_note.jpg" alt="Blue note">
+                    <div class="gallery-title">Blue note</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
-                    <img src="untitled_2.jpg" alt="Untitled">
-                    <div class="gallery-title">Untitled</div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Chaos" data-size="" data-technique="Oil paint on canvas">
+                    <img src="Chaos.jpg" alt="Chaos">
+                    <div class="gallery-title">Chaos</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
-                    <img src="untitled_3.jpg" alt="Untitled">
-                    <div class="gallery-title">Untitled</div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Untamed thoughts" data-size="" data-technique="Oil paint and ink on canvas">
+                    <img src="Untamed_thoughts.jpg" alt="Untamed thoughts">
+                    <div class="gallery-title">Untamed thoughts</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)" data-title="Untitled" data-size="" data-technique="">
-                    <img src="untitled_4.jpg" alt="Untitled">
-                    <div class="gallery-title">Untitled</div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="The owner" data-size="" data-technique="Oil painting on canvas">
+                    <img src="The_owner.jpg" alt="The owner">
+                    <div class="gallery-title">The owner</div>
+                </div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Weak man&#39;s mind" data-size="" data-technique="Acrylic and oil paint on canvas">
+                    <img src="Weak_mans_mind.jpg" alt="Weak man's mind">
+                    <div class="gallery-title">Weak man&#39;s mind</div>
+                </div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Crooked red pot" data-size="" data-technique="Acrylic on paper">
+                    <img src="Crooked_red_pot.jpg" alt="Crooked red pot">
+                    <div class="gallery-title">Crooked red pot</div>
+                </div>
+                <div class="gallery-item" data-era="2024-2026" onclick="openLightbox(this)" data-title="Basilisk&#39;s kiss" data-size="140 x 140 cm" data-technique="Acrylic and oil paint on canvas">
+                    <img src="Basilisks_kiss.jpg" alt="Basilisk's kiss">
+                    <div class="gallery-title">Basilisk&#39;s kiss</div>
                 </div>
             </div>
         </section>
@@ -738,6 +866,29 @@
                 }
             });
         });
+
+        // Era filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function applyFilter(filter) {
+            galleryItems.forEach(item => {
+                const era = item.dataset.era;
+                item.classList.toggle('hidden', era !== filter);
+            });
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilter(btn.dataset.filter);
+            });
+        });
+
+        // Run active filter on load
+        const activeBtn = document.querySelector('.filter-btn.active');
+        if (activeBtn) applyFilter(activeBtn.dataset.filter);
     </script>
 </body>
 </html>
